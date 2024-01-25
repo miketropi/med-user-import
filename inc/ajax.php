@@ -15,6 +15,8 @@ function mui_ajax_import_users() {
   $usersImport = $_POST['users'];
   if($usersImport && count($usersImport) > 0) {
     foreach($usersImport as $uImport) {
+      if(isset($uImpor['exists'])) continue;
+
       $userdata = [
         'user_login' => $uImport['Email'],
         'user_pass' => $uImport['Password'],
@@ -31,14 +33,14 @@ function mui_ajax_import_users() {
 add_action('wp_ajax_mui_ajax_import_users', 'mui_ajax_import_users');
 add_action('wp_ajax_nopriv_mui_ajax_import_users', 'mui_ajax_import_users');
 
-add_action( 'init', function() {
-  if(!isset($_GET['res_user'])) return;
+// add_action( 'init', function() {
+//   if(!isset($_GET['res_user'])) return;
 
-  $userdata = array(
-    'user_login' =>  'aaaaaaaa',
-    'user_email' => 'aaaaaaaa@gmail.com',
-    'user_pass'  =>  'aaaaaaaa' // When creating an user, `user_pass` is expected.
-  );
+//   $userdata = array(
+//     'user_login' =>  'aaaaaaaa',
+//     'user_email' => 'aaaaaaaa@gmail.com',
+//     'user_pass'  =>  'aaaaaaaa' // When creating an user, `user_pass` is expected.
+//   );
 
-  wp_insert_user( $userdata ) ;
-});
+//   wp_insert_user( $userdata ) ;
+// });
